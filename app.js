@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var methodOverride = require("method-override");
+var API_KEY = require("./config");
 
 // APP CONFIG
 mongoose.connect("mongodb://localhost/restful_blog_app");
@@ -34,5 +35,6 @@ app.get("/movies", function(req, res){
 });
 
 app.listen(3000, function(){
+	console.log(API_KEY);
 	console.log("Server is running");
 })
