@@ -7,11 +7,18 @@ body {
 	background: linear-gradient(0deg, rgba(254,6,30,1) 0%, rgba(113,6,0,1) 100%); /* w3c */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#710600', endColorstr='#FE061E',GradientType=0 ); /* ie6-9 */
 }
+html, body {
+	height:auto; /* fixes so that the body height is dynamic (instad of repeating) */
+	min-height:100%;
+}
+#body {
+	min-height:100vh;
+}
 
 footer {
 	border:1px solid black;
 	width:100%;
-	position:absolute;
+	position:relative;
 	bottom:0;
 }
 #tmdb-logo {

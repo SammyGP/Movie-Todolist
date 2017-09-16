@@ -1,9 +1,14 @@
 <% include partials/header %>
 
-<h1>Search Movies</h1>
-<form method="post" action="/movies/search">
-	<input type="text" name="search-movie" placeholder="search for a movie">
-	<input type="submit">
-</form>
+<div class="ui main text container segment">
+	<h1>Search Movies</h1>
+	<form method="post" action="/movies/search">
+		<div class="ui icon input">
+			<input type="text" name="search-movie" placeholder="Search..." />
+			<i class="search icon"></i>
+		</div>
+		<input class="ui basic button" type="submit" />
+	</form>
+</div>
 
 <% include partials/footer %>

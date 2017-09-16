@@ -27,7 +27,7 @@ var Movie = mongoose.model("Movie", movieSchema);
 
 // Routes
 
-// Re-route
+// re-route
 app.get("/", function(req, res){
 	res.redirect("/movies");
 });
@@ -42,7 +42,6 @@ app.get("/movies", function(req, res){
 		}
 	});
 });
-	// search result index
 
 // SEARCH
 // renders search page

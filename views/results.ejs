@@ -3,11 +3,12 @@
 <h1>Results</h1>
 	<% results.forEach(function(movie){ %>
 		<div class="ui main text container segment">
-			<p><%= movie.title %></p>
-			<p><%= movie.id %></p>
+			<div class="ui huge header"><%= movie.title %></div>
+			<span>Raiting: <%= movie.vote_average %></span>
+			<p><%= movie.overview %></p>
 			<form action="/movies/results" method="post">
-				<input type="text" name="movie[id]" value="<%= movie.id %>" readonly/>
-				<input type="submit"/>
+				<input type="hidden" name="movie[id]" value="<%= movie.id %>" readonly/>
+				<input class="ui red basic button" type="submit" value="Add Movie" />
 			</form>
 		</div>
 	<% }); %>
