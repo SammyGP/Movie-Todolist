@@ -1,32 +1,40 @@
 <% include partials/header %>
 
-<h1>New Movie</h1>
-<form class="ui form" method="post" action="/movies">
-	<div class="field">
-		<label>Title</label>
-		<input type="text" name="movie[title]" value="<%= movie.original_title %>" readonly />
-	</div>
-	<div class="field">
-		<label>Global Raiting</label>
-		<input type="text" name="movie[raiting]" value="<%= movie.vote_average %>" readonly />
-	</div>
-	<div class="field">
-		<label>Image Source</label>
-		<input type="text" name="movie[image]" value="<%= movie.poster_path %>" readonly />
-	</div>
-	<div class="field">
-		<label>Description</label>
-		<textarea name="movie[description]" readonly ><%= movie.overview %></textarea>
-	</div>
-	<div class="field">
-		<label>Raiting</label>
-		<input type="number" name="movie[myraiting]" min="1" max="10" placeholder="Raiting" />
-	</div>
-	<div class="field">
-		<label>Notes</label>
-		<input type="text" name="movie[review]" placeholder="Review" />
-	</div>
-	<input class="ui red basic button" type="submit" />
-</form>
+<div class="ui main text container segment">
+	<h1>New Movie</h1>
+	<form class="ui form" method="post" action="/movies">
+		<div class="field">
+			<label>Title</label>
+			<input type="text" name="movie[title]" value="<%= movie.original_title %>" readonly />
+		</div>
+		<div class="field">
+			<label>Global Raiting</label>
+			<input type="text" name="movie[raiting]" value="<%= movie.vote_average %>" readonly />
+		</div>
+		<div class="field">
+			<label>Image Source</label>
+			<input type="text" name="movie[image]" value="<%= movie.poster_path %>" readonly />
+		</div>
+		<div class="field">
+			<label>Description</label>
+			<textarea name="movie[description]" readonly ><%= movie.overview %></textarea>
+		</div>
+		<div class="field">
+			<label>Raiting</label>
+			<input type="number" name="movie[myraiting]" min="1" max="10" placeholder="Raiting" />
+		</div>
+		<div class="field">
+			<label>Notes</label>
+			<input type="text" name="movie[review]" placeholder="Review" />
+		</div>
+		<div class="field">
+			<label>Status</label>
+			<select name="movie[status]">
+				<option value="not seen">Not Seen</option>
+				<option value="seen">Seen</option>
+			</select>
+		</div>
+		<input class="ui red basic button" type="submit" />
+	</form>
+</div>
 
-<% include partials/footer %>

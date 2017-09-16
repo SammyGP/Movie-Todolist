@@ -7,7 +7,7 @@ var request = require("request");
 var API_KEY = require("./config");
 
 // APP CONFIG
-mongoose.connect("mongodb://localhost/restful_blog_app");
+mongoose.connect("mongodb://localhost/movie_todolist");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -20,7 +20,8 @@ var movieSchema = new mongoose.Schema({
 	image: String,
 	description: String,
 	myraiting: Number,
-	review: String
+	review: String,
+	status:{type: String, default: "not seen"}
 });
 var Movie = mongoose.model("Movie", movieSchema);
 
@@ -44,10 +45,12 @@ app.get("/movies", function(req, res){
 	// search result index
 
 // SEARCH
+// renders search page
 app.get("/movies/search", function(req, res){
 	res.render("search");
 });
 
+// queries the api for the selected search term and renders the result page with the results
 app.post("/movies/search", function(req, res){
 	request("https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&query=" + req.body["search-movie"], function(err, response, body){
 		if(err) {
@@ -60,12 +63,22 @@ app.post("/movies/search", function(req, res){
 });
 
 // NEW
+// makes sure you cant get to new from the get route (because the movie data from post wont follow)
 app.get("/movies/new", function(req, res){
-	console.log(req.body);
+	console.log("No movie data");
 	res.redirect("index");
 });
 
+// post the data of the selected movie from the api search results to the "new" page 
+app.post("/movies/results", function(req, res){
+	request("https://api.themoviedb.org/3/movie/" + req.body.movie.id + "?api_key=" + API_KEY, function(err, response, body){
+		body =JSON.parse(body);
+		res.render("new", {movie: body});
+	});
+});
+
 // CREATE
+// adds the movie with the data from the api and personal input into the db
 app.post("/movies", function(req, res){
 	Movie.create(req.body.movie, function(err, newMovie){
 		if(err) {
@@ -81,14 +94,7 @@ app.post("/movies", function(req, res){
 app.get("/movies/results", function(req, res){
 	res.redirect("/movies/search");
 });
-app.post("/movies/results", function(req, res){
-	console.log(req.body);
-	console.log(req.body.movie.id);
-	request("https://api.themoviedb.org/3/movie/" + req.body.movie.id + "?api_key=" + API_KEY, function(err, response, body){
-		body =JSON.parse(body);
-		res.render("new", {movie: body});
-	});
-});
+
 
 
 app.listen(3000, function(){

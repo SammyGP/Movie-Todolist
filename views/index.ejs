@@ -1,19 +1,21 @@
 <% include partials/header %>
 
 <h1>Movie Watchlist</h1>
-
-<% movies.forEach(function(movie){ %>
 	<div class="ui main text container segment">
-		<h1><%= movie.title %></h1>
-		<span><%= movie.raiting %></span>
-		<p><<%= movie.description %></p>
-		<br>
-		<div>
-			<span><%= movie.myraiting %></span>
-			<p><%= movie.review %></p>
+		<div class="ui grid">
+		<% movies.forEach(function(movie){ %>
+			<div class="four wide column">
+				<h1><%= movie.title %></h1>
+				<span>Raiting: <%= movie.raiting %></span>
+				<p><%= movie.description.substring(0, 50) %></p>
+				<div>
+					<span><%= movie.myraiting %></span>
+					<p>Notes <i><%= movie.review %></i></p>
+				</div>
+			</div>
+			<% }) %>
 		</div>
 	</div>
-	<% }) %>
 
 
 <% include partials/footer %>
